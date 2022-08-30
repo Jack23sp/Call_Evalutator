@@ -40,59 +40,44 @@
                 <ul id="list_parameters">
                     <li>
                         <label for="agent_name" class="label">Agent Name</label>
-                        <input type="text" style="text-transform: capitalize;" id="agent_name" name="agent_name" size="10" runat="server" class="input"/>
+                        <asp:DropDownList required="required" name="agent_name" id="agent_name" placeholder="Select the agent name" runat="server" class="dropdown filter" AutoPostback="true" />
                     </li>
                     <br />
                     <li>
                         <label for="case_number" class="label">Case Number</label>
-                        <input type="text" style="text-transform: uppercase" id="case_number" name="case_number" size="10" runat="server" class="input"/>
+                        <input type="text" style="text-transform: uppercase" id="case_number" name="case_number" size="10" runat="server" class="input filter" required="required"/>
                     </li>
                     <br />
                     <li>
-                        <label for="date_evaluation" class="label">Date of evaluation</label>
-                        <input type="date" value="2022-08-15" id="date_evaluation" name="date_evaluation" size="10" runat="server" class="input"/>
+                        <label for="date_evaluation" id="lblDate" class="label" runat="server">Date of evaluation</label>
+                        <input type="text" id="date_evaluation" name="date_evaluation" size="10" runat="server" readonly="true" />
                     </li>
                     <br />
                     <li>
                         <label for="owner" class="label">Evaluation Owner</label>
-                        <select required="required" name="owner" id="owner" placeholder="Select the owner" runat="server" class="dropdown">
-                            <option value="" selected="selected">Select the owner</option>
-                            <option value="Carlotta Casali">Carlotta Casali</option>
-                            <option value="Davide De Simone">Davide De Simone</option>
-                            <option value="Carmen Monforte">Carmen Monforte</option>
-                            <option value="Matteo Pucci">Matteo Pucci</option>
-                            <option value="Giuseppina Terella">Giuseppina Terella</option>
-                            <option value="Marcello Goffredo">Marcello Goffredo</option>
-                        </select>
+                        <asp:DropDownList required="required" name="owner" id="owner" placeholder="Select the owner" runat="server" class="dropdown filter"  AutoPostback="true"/>
                     </li>
                     <br />
                     <li>
                         <label for="call_date" class="label">Date of call</label>
-                        <input type="date" value="2022-08-15" id="call_date" name="call_date" size="10" runat="server" class="input"/>
+                        <input type="date" value="" id="call_date" name="call_date" size="10" runat="server" class="input filter" required="required"/>
                     </li>
                     <br />
                     <li>
                         <label for="call_person" class="label">Person in call</label>
-                        <select required="required" name="call_person" id="call_person" placeholder="Select a person" runat="server" class="dropdown">
-                            <option value="" selected="selected">Select a person</option>
-                            <option value="Client">Client</option>
-                            <option value="Second Applicant">Second Applicant</option>
-                            <option value="Attorney">Attorney</option>
-                            <option value="Client not verified">Client not verified</option>
-                            <option value="Third person">Third person</option>
-                        </select>
+                        <asp:DropDownList required="required" name="call_person" id="call_person" placeholder="Select a person" runat="server" class="dropdown filter"  AutoPostback="true"/>
                     </li>
                 </ul>
             </div>
             <div>
                 <!-- clear and confirm button -->
                 <button type="button" id="clear_button">
-                    <img src="images/clean.png" alt="clean" class="image" onclick="Clear();"/></button>
-                <asp:ImageButton ID="confirm_button" runat="server" ImageUrl="~/images/confirm.png" OnClick="confirm_button_Click" />
+                    <img src="images/clean.png" alt="clean" class="image" onclick="Clear();" /></button>
+                <asp:ImageButton ID="confirm_button" runat="server" ImageUrl="~/images/confirm.png" OnClick="confirm_button_Click" ValidationGroup="Send"/>
                 <button type="button" id="print_button" onclick="Print();">
                     <img src="images/download.png" alt="print" class="image" /></button>
                 <button type="button" id="email_button" onclick="SendMail();"/>
-                    <img src="images/mail.png" alt="email" class="image" />
+                <img src="images/mail.png" alt="email" class="image" />
             </div>
             <div id="support">This page has to be considered an official document. In case you need support, please send an email to supervisorIT@it.kruk.eu</div>
         </section>
@@ -139,7 +124,7 @@
             <div>
                 <!-- input score -->
                 <p id="score1">Score</p>
-                <input type="number" name="score" value="" min="1" max="3" id="input_score1" class="input" runat="server"/>
+                <input type="number" name="score" value="" min="1" max="3" id="input_score1" class="input" runat="server" />
                 <input type="number" name="score" value="" min="1" max="3" id="input_score2" class="input" runat="server" />
                 <input type="number" name="score" value="" min="1" max="3" id="input_score3" class="input" runat="server" />
                 <input type="number" name="score" value="" min="1" max="3" id="input_score4" class="input" runat="server" />
@@ -166,5 +151,6 @@
             </div>
         </section>
     </form>
+    <input type="hidden" id="present_check" value="0" runat="server" />
 </body>
 </html>

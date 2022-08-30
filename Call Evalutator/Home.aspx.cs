@@ -16,17 +16,46 @@ namespace Call_Evalutator
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                var localDateTime = DateTime.Now.ToString("dd/MM/yyyy");
+                date_evaluation.Value = localDateTime;
 
+                agent_name.DataSource = oper.GetAgentName();
+                agent_name.DataTextField = "agent_name";
+                agent_name.DataValueField = "agent_mail";
+                agent_name.DataBind();
+                agent_name.Items.Insert(0, new ListItem("Select agent name", ""));
+
+                owner.DataSource = oper.GetEvalutationOwner();
+                owner.DataTextField = "Owner";
+                owner.DataValueField = "Owner";
+                owner.DataBind();
+                owner.Items.Insert(0, new ListItem("Select the owner", ""));
+
+                call_person.DataSource = oper.GetPersonInCall();
+                call_person.DataTextField = "PersonInCall";
+                call_person.DataValueField = "PersonInCall";
+                call_person.DataBind();
+                call_person.Items.Insert(0, new ListItem("Select a person", ""));
+            }
         }
 
         protected void confirm_button_Click(object sender, EventArgs e)
         {
-            info.agent_name = agent_name.Value;
+            info.agent_name = agent_name.Items[agent_name.SelectedIndex].Text;
             info.case_number = case_number.Value;
             info.date_evaluation = Convert.ToDateTime(date_evaluation.Value);
-            info.owner = owner.Value;
-            info.call_person = call_person.Value;
-            info.call_date = Convert.ToDateTime(call_date.Value);
+            info.owner = owner.Items[agent_name.SelectedIndex].Text;
+            info.call_person = call_person.Items[agent_name.SelectedIndex].Text;
+            if (Convert.ToDateTime(call_date.Value) > DateTime.UtcNow)
+            {
+                return;
+            }
+            else
+            {
+                info.call_date = Convert.ToDateTime(call_date.Value);
+            }
             info.input_score1 = input_score1.Value;
             info.input_score2 = input_score2.Value;
             info.input_score3 = input_score3.Value;
@@ -47,7 +76,7 @@ namespace Call_Evalutator
             info.input_score18 = input_score18.Value;
 
             int result = oper.InsertCall(info);
-            if(result == 1)
+            if (result == 1)
             {
                 ClientScript.RegisterStartupScript
                         (GetType(), Guid.NewGuid().ToString(), "AlertSuccess();", true);

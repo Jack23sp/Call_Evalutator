@@ -30,7 +30,7 @@ namespace Call_Evalutator
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText agent_name;
+        protected global::System.Web.UI.WebControls.DropDownList agent_name;
 
         /// <summary>
         /// Controllo case_number.
@@ -42,13 +42,22 @@ namespace Call_Evalutator
         protected global::System.Web.UI.HtmlControls.HtmlInputText case_number;
 
         /// <summary>
+        /// Controllo lblDate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDate;
+
+        /// <summary>
         /// Controllo date_evaluation.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl date_evaluation;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText date_evaluation;
 
         /// <summary>
         /// Controllo owner.
@@ -57,7 +66,7 @@ namespace Call_Evalutator
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect owner;
+        protected global::System.Web.UI.WebControls.DropDownList owner;
 
         /// <summary>
         /// Controllo call_date.
@@ -75,7 +84,7 @@ namespace Call_Evalutator
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect call_person;
+        protected global::System.Web.UI.WebControls.DropDownList call_person;
 
         /// <summary>
         /// Controllo confirm_button.
@@ -247,5 +256,14 @@ namespace Call_Evalutator
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl input_score18;
+
+        /// <summary>
+        /// Controllo present_check.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden present_check;
     }
 }
