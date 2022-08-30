@@ -40,12 +40,12 @@
                 <ul id="list_parameters">
                     <li>
                         <label for="agent_name" class="label">Agent Name</label>
-                        <asp:DropDownList required="required" name="agent_name" id="agent_name" placeholder="Select the agent name" runat="server" class="dropdown filter" AutoPostback="true" />
+                        <asp:DropDownList required="required" name="agent_name" ID="agent_name" placeholder="Select the agent name" runat="server" class="dropdown filter" AutoPostBack="true" />
                     </li>
                     <br />
                     <li>
                         <label for="case_number" class="label">Case Number</label>
-                        <input type="text" style="text-transform: uppercase" id="case_number" name="case_number" size="10" runat="server" class="input filter" required="required"/>
+                        <input type="text" style="text-transform: uppercase" id="case_number" name="case_number" size="10" runat="server" class="input filter" required="required" />
                     </li>
                     <br />
                     <li>
@@ -55,17 +55,17 @@
                     <br />
                     <li>
                         <label for="owner" class="label">Evaluation Owner</label>
-                        <asp:DropDownList required="required" name="owner" id="owner" placeholder="Select the owner" runat="server" class="dropdown filter"  AutoPostback="true"/>
+                        <asp:DropDownList required="required" name="owner" ID="owner" placeholder="Select the owner" runat="server" class="dropdown filter" AutoPostBack="true" />
                     </li>
                     <br />
                     <li>
                         <label for="call_date" class="label">Date of call</label>
-                        <input type="date" value="" id="call_date" name="call_date" size="10" runat="server" class="input filter" required="required"/>
+                        <input type="date" value="" id="call_date" name="call_date" size="10" runat="server" class="input filter" required="required" />
                     </li>
                     <br />
                     <li>
                         <label for="call_person" class="label">Person in call</label>
-                        <asp:DropDownList required="required" name="call_person" id="call_person" placeholder="Select a person" runat="server" class="dropdown filter"  AutoPostback="true"/>
+                        <asp:DropDownList required="required" name="call_person" ID="call_person" placeholder="Select a person" runat="server" class="dropdown filter" AutoPostBack="true" />
                     </li>
                 </ul>
             </div>
@@ -73,10 +73,10 @@
                 <!-- clear and confirm button -->
                 <button type="button" id="clear_button">
                     <img src="images/clean.png" alt="clean" class="image" onclick="Clear();" /></button>
-                <asp:ImageButton ID="confirm_button" runat="server" ImageUrl="~/images/confirm.png" OnClick="confirm_button_Click" ValidationGroup="Send"/>
+                <asp:ImageButton ID="confirm_button" runat="server" ImageUrl="~/images/confirm.png" OnClick="confirm_button_Click" ValidationGroup="Send" />
                 <button type="button" id="print_button" onclick="Print();">
                     <img src="images/download.png" alt="print" class="image" /></button>
-                <button type="button" id="email_button" onclick="SendMail();"/>
+                <button type="button" id="email_button" onclick="SendMail(cc_.value,body_.value,alert_mail_.value);" />
                 <img src="images/mail.png" alt="email" class="image" />
             </div>
             <div id="support">This page has to be considered an official document. In case you need support, please send an email to supervisorIT@it.kruk.eu</div>
@@ -150,7 +150,9 @@
                 <h1>Call Evaluator</h1>
             </div>
         </section>
+        <input type="hidden" id="cc_" runat="server" visible="true" />
+        <input type="hidden" id="body_" runat="server" visible="true" />
+        <input type="hidden" id="alert_mail_" runat="server" visible="true" />
     </form>
-    <input type="hidden" id="present_check" value="0" runat="server" />
 </body>
 </html>

@@ -258,12 +258,30 @@ namespace Call_Evalutator
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl input_score18;
 
         /// <summary>
-        /// Controllo present_check.
+        /// Controllo cc_.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden present_check;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden cc_;
+
+        /// <summary>
+        /// Controllo body_.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden body_;
+
+        /// <summary>
+        /// Controllo alert_mail_.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden alert_mail_;
     }
 }

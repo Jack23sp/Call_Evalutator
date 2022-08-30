@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -18,22 +19,36 @@ namespace Call_Evalutator
         {
             if (!IsPostBack)
             {
+                Session["Tabella_Eval"] = ConfigurationManager.AppSettings["CallEval"];
+                Session["Tabella_AgentName"] = ConfigurationManager.AppSettings["AgentName"];
+                Session["Tabella_Owner"] = ConfigurationManager.AppSettings["Owner"];
+                Session["Tabella_PersonInCall"] = ConfigurationManager.AppSettings["PersonInCall"];
+
+                Session["Tabella_cc"] = ConfigurationManager.AppSettings["cc"];
+                cc_.Value = Session["Tabella_cc"].ToString();
+
+                Session["Tabella_Body"] = ConfigurationManager.AppSettings["Body"];
+                body_.Value = Session["Tabella_Body"].ToString();
+
+                Session["Alert_mail"] = ConfigurationManager.AppSettings["msg_mail"];
+                alert_mail_.Value = Session["Alert_mail"].ToString();
+
                 var localDateTime = DateTime.Now.ToString("dd/MM/yyyy");
                 date_evaluation.Value = localDateTime;
 
-                agent_name.DataSource = oper.GetAgentName();
+                agent_name.DataSource = oper.GetAgentName(Session["Tabella_AgentName"].ToString());
                 agent_name.DataTextField = "agent_name";
                 agent_name.DataValueField = "agent_mail";
                 agent_name.DataBind();
                 agent_name.Items.Insert(0, new ListItem("Select agent name", ""));
 
-                owner.DataSource = oper.GetEvalutationOwner();
+                owner.DataSource = oper.GetEvalutationOwner(Session["Tabella_Owner"].ToString());
                 owner.DataTextField = "Owner";
                 owner.DataValueField = "Owner";
                 owner.DataBind();
                 owner.Items.Insert(0, new ListItem("Select the owner", ""));
 
-                call_person.DataSource = oper.GetPersonInCall();
+                call_person.DataSource = oper.GetPersonInCall(Session["Tabella_PersonInCall"].ToString());
                 call_person.DataTextField = "PersonInCall";
                 call_person.DataValueField = "PersonInCall";
                 call_person.DataBind();
@@ -75,7 +90,7 @@ namespace Call_Evalutator
             info.input_score17 = input_score17.Value;
             info.input_score18 = input_score18.Value;
 
-            int result = oper.InsertCall(info);
+            int result = oper.InsertCall(info, Session["Tabella_Eval"].ToString());
             if (result == 1)
             {
                 ClientScript.RegisterStartupScript

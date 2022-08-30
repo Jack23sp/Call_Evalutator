@@ -25,7 +25,9 @@ window.onload = function FindVariable() {
     input = document.getElementsByClassName('input');
     dropdown = document.getElementsByClassName('dropdown');
     filter = document.getElementsByClassName('filter');
+
     MaxDate();
+
 }
 
 
@@ -75,18 +77,18 @@ function AlertFailed() {
     alert("Si è riscontrato un errore, dati non salvati!");
 }
 
-function SendMail() {
+function SendMail(cc, body, alert) {
     if (CheckFilled() == true) {
-        if (confirm("Inviare Mail? Si e' gia' provveduto al salvataggio del file?") == true) {
+        if (confirm(alert) == true) {
             var link;
             var value = agent_name.value;
 
-                link = "mailto:" + value
-                    + "?cc=myCCaddress@example.com"
-                    + "&subject=" + encodeURIComponent("Call Evalutation on case " + case_number.value)
-                    + "&body=" + encodeURIComponent("Ciao,\nIn allegato puoi trovare la call evaluation con tutti i dettagli.\nIn caso di dubbi sono a disposizione.")
-                    ;
-                window.location.href = link;
+            link = "mailto:" + value
+                + "?cc=" + cc
+                + "&subject=" + encodeURIComponent("Call Evalutation on case " + case_number.value)
+                + "&body=" + encodeURIComponent(body)
+                ;
+            window.location.href = link;
         }
     }
     else {
