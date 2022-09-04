@@ -30,6 +30,19 @@ window.onload = function FindVariable() {
 
 }
 
+$(document).ready(function () {
+    $(".Calender").dynDateTime({
+        showsTime: true,
+        ifFormat: "%Y/%m/%d %H:%M",
+        daFormat: "%l;%M %p, %e %m, %Y",
+        align: "BR",
+        electric: false,
+        singleClick: false,
+        displayArea: ".siblings('.dtcDisplayArea')",
+        button: ".next()"
+    });
+});
+
 
 function MaxDate() {
     var today = new Date();
@@ -74,7 +87,38 @@ function AlertSuccess() {
 }
 
 function AlertFailed() {
-    alert("Si è riscontrato un errore, dati non salvati!");
+    alert("Si e' riscontrato un errore, dati non salvati!");
+}
+
+function AlertSuccessUpdate() {
+    alert("Dati modificati correttamente!");
+}
+
+function AlertFailedUpdate() {
+    alert("Si e' riscontrato un errore nella modifica dei dati!");
+}
+
+function AlertSuccessDelete() {
+    alert("Dati eliminati correttamente!");
+}
+
+function AlertFailedDelete() {
+    alert("Non e' stato possibile eliminare i dati a causa di un errore!");
+}
+function NotAuthorizedToInsert() {
+    alert("Non si e' autorizzati ad effettuare l'inserimento! Contattare l'amministratore di sistema.");
+}
+
+function TransferToVisualize() {
+    window.location.href = "Visualizzazione.aspx";
+}
+
+function CallDateError() {
+    alert("Il campo call date deve essere minore della data odierna e della data di valutazione!");
+}
+
+function CheckData() {
+    alert("I campi numerici devo essere compilati con valori da 0 a 3!");
 }
 
 function SendMail(cc, body, alert) {

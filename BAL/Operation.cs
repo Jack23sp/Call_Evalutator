@@ -15,14 +15,6 @@ namespace BAL
         public DBConnection connection = new DBConnection();
         public Information info = new Information();
 
-        public int InsertCall(Information info, string table)
-        {   
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "INSERT INTO "+ table +" VALUES ('"+ info.agent_name + "' , '" + info.case_number + "', '" + info.date_evaluation + "', '" + info.owner + "', '" + info.call_date + "', '" + info.call_person + "', '" + info.input_score1 + "', '" + info.input_score2 + "', '" + info.input_score3 + "', '" + info.input_score4 + "', '" + info.input_score5 + "', '" + info.input_score6 + "', '" + info.input_score7 + "', '" + info.input_score8 + "', '" + info.input_score9 + "', '" + info.input_score10 + "', '" + info.input_score11 + "', '" + info.input_score12 + "', '" + info.input_score13 + "', '" + info.input_score14 + "', '" + info.input_score15 + "', '" + info.input_score16 + "', '" + info.input_score17 + "', '" + info.input_score18 + "')";
-            return connection.ExeNonQuery(cmd);
-        }
-
         public DataTable GetAgentName(string table)
         {
             SqlCommand cmd = new SqlCommand();
@@ -47,6 +39,46 @@ namespace BAL
             return connection.ExeReader(cmd);
         }
 
+        public DataTable GetSpecificJobMacroArea()
+        {
+            return connection.ExecuteProcedureJobMacro();
+        }
+        public DataTable GetGridData()
+        {
+            return connection.ExecuteProcedureGridData();
+        }
 
+        public DataTable GetGridDataWithInfo(Information info)
+        {
+            return connection.ExecuteProcedureGridDataWithInfo(info);
+        }
+
+        public int InsertCallProcedure(Information info)
+        {
+            return connection.ExecuteProcedureInsert(info);
+        }
+
+        public int InsertUpdateProcedure(Information info)
+        {
+            return connection.ExecuteProcedureUpdate(info);
+        }
+
+        public string CheckAuthorization(string user, int auth_type)
+        {
+            return connection.ExecuteProcedureCheckAuthorization(user, auth_type);
+        }
+
+        public int DeleteDataFromProcedure(int id, string last_modifier)
+        {
+            return connection.ExecuteProcedureDelete(id, last_modifier);
+        }
+
+        public int DeleteRecord(string table, int id)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "UPDATE " + table + " SET flg_rcn = N WHERE id = " + id;
+            return connection.ExeNonQuery(cmd);
+        }
     }
 }

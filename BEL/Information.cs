@@ -9,11 +9,12 @@ namespace BEL
 {
     public class Information
     {
+        public int id_modify{ get; set; }
         public string agent_name { get; set; }
         public string case_number { get; set; }
-        public DateTime date_evaluation { get; set; }
+        public string date_evaluation { get; set; }
         public string owner { get; set; }
-        public DateTime call_date { get; set; }
+        public string call_date { get; set; }
         public string call_person { get; set; }
         public string input_score1 { get; set; }
         public string input_score2 { get; set; }
@@ -33,5 +34,7 @@ namespace BEL
         public string input_score16 { get; set; }
         public string input_score17 { get; set; }
         public string input_score18 { get; set; }
+        public string flg_rcn { get; set; }
+        public string last_modifier { get; set; }
     }
 }

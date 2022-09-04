@@ -67,8 +67,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSS\calendar-blue.css" />
     <Content Include="CSS\style.css" />
     <Content Include="images\agent.png" />
+    <Content Include="images\calender.png" />
     <Content Include="images\case.png" />
     <Content Include="images\clean.png" />
     <Content Include="images\confirm.png" />
@@ -80,7 +82,14 @@
     <Content Include="images\personincall.png" />
     <Content Include="images\print.png" />
     <Content Include="images\teamleader.png" />
+    <Content Include="images\visualize.png" />
+    <Content Include="JS\calendar-en.min.js" />
+    <None Include="JS\jquery-1.4.1-vsdoc.js" />
+    <Content Include="JS\jquery-1.4.1.js" />
+    <Content Include="JS\jquery-1.4.1.min.js" />
+    <Content Include="JS\jquery.dynDateTime.min.js" />
     <Content Include="JS\scripts.js" />
+    <Content Include="Visualizzazione.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
   </ItemGroup>
@@ -92,6 +101,13 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Visualizzazione.aspx.cs">
+      <DependentUpon>Visualizzazione.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Visualizzazione.aspx.designer.cs">
+      <DependentUpon>Visualizzazione.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

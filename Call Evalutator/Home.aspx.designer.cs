@@ -258,6 +258,42 @@ namespace Call_Evalutator
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl input_score18;
 
         /// <summary>
+        /// Controllo dvImage.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvImage;
+
+        /// <summary>
+        /// Controllo rdrBtn.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton rdrBtn;
+
+        /// <summary>
+        /// Controllo divGrv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGrv;
+
+        /// <summary>
+        /// Controllo grvDati.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvDati;
+
+        /// <summary>
         /// Controllo cc_.
         /// </summary>
         /// <remarks>

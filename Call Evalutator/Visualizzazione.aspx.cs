@@ -1,19 +1,19 @@
-﻿using System;
+﻿using BAL;
+using BEL;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BAL;
-using BEL;
 using System.Data;
 using System.Data.SqlClient;
-using System.Security.Principal;
+using System.Globalization;
 
 namespace Call_Evalutator
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class Visualizzazione : System.Web.UI.Page
     {
         public Information info = new Information();
         public Operation oper = new Operation();
@@ -22,24 +22,6 @@ namespace Call_Evalutator
         {
             if (!IsPostBack)
             {
-                WindowsIdentity identity = HttpContext.Current.Request.LogonUserIdentity;
-                string result = identity.Name.Substring(identity.Name.LastIndexOf('\\') + 1);
-
-                Session["canInsert"] = oper.CheckAuthorization(result, 1).ToString();
-
-                Session["Tabella_Eval"] = ConfigurationManager.AppSettings["CallEval"];
-                Session["Tabella_AgentName"] = ConfigurationManager.AppSettings["AgentName"];
-                Session["Tabella_Owner"] = ConfigurationManager.AppSettings["Owner"];
-                Session["Tabella_PersonInCall"] = ConfigurationManager.AppSettings["PersonInCall"];
-
-                Session["Tabella_cc"] = ConfigurationManager.AppSettings["cc"];
-                cc_.Value = Session["Tabella_cc"].ToString();
-
-                Session["Tabella_Body"] = ConfigurationManager.AppSettings["Body"];
-                body_.Value = Session["Tabella_Body"].ToString();
-
-                Session["Alert_mail"] = ConfigurationManager.AppSettings["msg_mail"];
-                alert_mail_.Value = Session["Alert_mail"].ToString();
 
                 var localDateTime = DateTime.Now.ToString("dd/MM/yyyy");
                 date_evaluation.Value = localDateTime;
@@ -47,7 +29,7 @@ namespace Call_Evalutator
                 Session["Agent_DT"] = oper.GetAgentName(Session["Tabella_AgentName"].ToString());
                 agent_name.DataSource = oper.GetAgentName(Session["Tabella_AgentName"].ToString());
                 agent_name.DataTextField = "agent_name";
-                agent_name.DataValueField = "agent_mail";
+                agent_name.DataValueField = "agent_name";
                 agent_name.DataBind();
                 agent_name.Items.Insert(0, new ListItem("Select agent name", ""));
 
@@ -64,17 +46,14 @@ namespace Call_Evalutator
                 call_person.DataValueField = "PersonInCall";
                 call_person.DataBind();
                 call_person.Items.Insert(0, new ListItem("Select a person", ""));
-
-                GrvDatiBind();
             }
         }
-
         protected void grvDati_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             string id = grvDati.DataKeys[e.RowIndex]["Id"].ToString();
             WindowsIdentity identity = HttpContext.Current.Request.LogonUserIdentity;
 
-            int result = oper.DeleteDataFromProcedure(Convert.ToInt32(id),identity.Name);
+            int result = oper.DeleteDataFromProcedure(Convert.ToInt32(id), identity.Name);
             if (result == 1)
             {
                 ClientScript.RegisterStartupScript
@@ -85,13 +64,13 @@ namespace Call_Evalutator
                 ClientScript.RegisterStartupScript
                         (GetType(), Guid.NewGuid().ToString(), "AlertFailedDelete();", true);
             }
-            GrvDatiBind();
+            GrvDatiBind(((Information)Session["Info"]));
         }
 
         protected void grvDati_RowEditing(object sender, GridViewEditEventArgs e)
         {
             grvDati.EditIndex = e.NewEditIndex;
-            GrvDatiBind();
+            GrvDatiBind(((Information)Session["Info"]));
             DropDownList dl = (DropDownList)grvDati.Rows[e.NewEditIndex].FindControl("ddlAgentName");
             dl.Enabled = true;
             //DATE EVALUTATION
@@ -113,84 +92,48 @@ namespace Call_Evalutator
         protected void grvDati_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grvDati.PageIndex = e.NewPageIndex;
-            GrvDatiBind();
+            GrvDatiBind(((Information)Session["Info"]));
         }
         protected void grvDati_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             grvDati.EditIndex = -1;
-            GrvDatiBind();
+            GrvDatiBind(((Information)Session["Info"]));
         }
 
-        public void GrvDatiBind()
+        public void GrvDatiBind(Information info)
         {
             DataTable dt = new DataTable();
-            Session["GridData"] = oper.GetGridData();
-            //if (((DataTable)Session["GridData"]).Rows.Count > 0)
-            //{
-                grvDati.DataSource = (DataTable)Session["GridData"];
-                grvDati.DataBind();
-            divGrv.Visible = true;
-            //}
+            Session["GridData"] = oper.GetGridDataWithInfo(info);
+            grvDati.DataSource = (DataTable)Session["GridData"];
+            grvDati.DataBind();
         }
         protected void confirm_button_Click(object sender, EventArgs e)
         {
-            if(Session["canInsert"].ToString() == "N" || string.IsNullOrEmpty(Session["canInsert"].ToString()))
-            {
-                ClientScript.RegisterStartupScript
-                    (GetType(), Guid.NewGuid().ToString(), "NotAuthorizedToInsert();", true);
-                return;
-            }
-            info.agent_name = agent_name.Items[agent_name.SelectedIndex].Text;
-            info.case_number = case_number.Value;
             DateTime dateTime = new DateTime();
-            dateTime = Convert.ToDateTime(date_evaluation.Value);
-            info.date_evaluation = dateTime.ToString("yyyy-MM-dd");
-            info.owner = owner.Items[owner.SelectedIndex].Text;
-            info.call_person = call_person.Items[call_person.SelectedIndex].Text;
-            if (Convert.ToDateTime(call_date.Value) > DateTime.UtcNow)
+            info.agent_name = agent_name.Items[agent_name.SelectedIndex].Value;
+            info.case_number = case_number.Value;
+            if (date_evaluation.Value != string.Empty)
             {
-                return;
+                dateTime = Convert.ToDateTime(date_evaluation.Value);
+                info.date_evaluation = dateTime.ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                info.date_evaluation = date_evaluation.Value;
+            }
+            info.owner = owner.Items[owner.SelectedIndex].Value;
+            info.call_person = call_person.Items[call_person.SelectedIndex].Value;
+            if (call_date.Value != string.Empty)
+            {
+                dateTime = Convert.ToDateTime(call_date.Value);
+                info.call_date = dateTime.ToString("yyyy-MM-dd");
             }
             else
             {
                 info.call_date = call_date.Value;
             }
-            info.input_score1 = input_score1.Value;
-            info.input_score2 = input_score2.Value;
-            info.input_score3 = input_score3.Value;
-            info.input_score4 = input_score4.Value;
-            info.input_score5 = input_score5.Value;
-            info.input_score6 = input_score6.Value;
-            info.input_score7 = input_score7.Value;
-            info.input_score8 = input_score8.Value;
-            info.input_score9 = input_score9.Value;
-            info.input_score10 = input_score10.Value;
-            info.input_score11 = input_score11.Value;
-            info.input_score12 = input_score12.Value;
-            info.input_score13 = input_score13.Value;
-            info.input_score14 = input_score14.Value;
-            info.input_score15 = input_score15.Value;
-            info.input_score16 = input_score16.Value;
-            info.input_score17 = input_score17.Value;
-            info.input_score18 = input_score18.Value;
-            info.flg_rcn = "Y";
-            info.last_modifier = "";
-
-            Session["ChartDate"] = oper.GetSpecificJobMacroArea();
-
-            //int result = oper.(info, Session["Tabella_Eval"].ToString());
-
-            int result = oper.InsertCallProcedure(info);
-            if (result == 1)
-            {
-                ClientScript.RegisterStartupScript
-                        (GetType(), Guid.NewGuid().ToString(), "AlertSuccess();", true);
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript
-                        (GetType(), Guid.NewGuid().ToString(), "AlertFailed();", true);
-            }
+            Session["Info"] = info;
+            GrvDatiBind(info);
         }
 
         protected void GrvDati_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -201,7 +144,7 @@ namespace Call_Evalutator
                 DropDownList ddlAgent = (e.Row.FindControl("ddlAgentName") as DropDownList);
                 ddlAgent.DataSource = ((DataTable)Session["Agent_DT"]);
                 ddlAgent.DataTextField = "agent_name";
-                ddlAgent.DataValueField = "agent_mail";
+                ddlAgent.DataValueField = "agent_name";
                 ddlAgent.DataBind();
                 ddlAgent.Items.Insert(0, new ListItem("Select agent name", ""));
                 ddlAgent.Enabled = false;
@@ -267,14 +210,7 @@ namespace Call_Evalutator
             info.case_number = ((TextBox)grvDati.Rows[e.RowIndex].Cells[4].Controls[0]).Text;
             info.date_evaluation = de.Text;
             info.owner = owner.SelectedItem.Text;
-            if (Convert.ToDateTime(cd.Text) > DateTime.UtcNow)
-            {
-                return;
-            }
-            else
-            {
-                info.call_date = cd.Text;
-            }
+            info.call_date = cd.Text;            
             info.call_person = callPerson.SelectedItem.Text;
             info.input_score1 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[9].Controls[0]).Text;
             info.input_score2 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[10].Controls[0]).Text;
@@ -298,6 +234,18 @@ namespace Call_Evalutator
             info.last_modifier = identity.Name;
             info.id_modify = Convert.ToInt32(id);
 
+            if(Convert.ToDateTime(info.call_date) > DateTime.UtcNow || Convert.ToDateTime(info.call_date) > Convert.ToDateTime(info.date_evaluation))
+            {
+                ClientScript.RegisterStartupScript
+                        (GetType(), Guid.NewGuid().ToString(), "CallDateError();", true);
+                return;
+            }
+            if(!CheckConsistencyData())
+            {
+                ClientScript.RegisterStartupScript
+                    (GetType(), Guid.NewGuid().ToString(), "CheckData();", true);
+                return;
+            }
 
             grvDati.EditIndex = -1;
             int result = oper.InsertUpdateProcedure(info);
@@ -311,13 +259,38 @@ namespace Call_Evalutator
                 ClientScript.RegisterStartupScript
                         (GetType(), Guid.NewGuid().ToString(), "AlertFailedUpdate();", true);
             }
-            GrvDatiBind();
-
+            GrvDatiBind((Information)Session["info"]);
         }
 
-        protected void rdrBtn_Click(object sender, EventArgs e)
+        public bool InsideRange(int value)
         {
-            Server.Transfer("Visualizzazione.aspx", true);
+            return value >= 0 && value <= 3; 
+        }
+
+        public bool CheckConsistencyData()
+        {
+            if (!InsideRange(Convert.ToInt32(info.input_score1)) ||
+               !InsideRange(Convert.ToInt32(info.input_score2)) ||
+               !InsideRange(Convert.ToInt32(info.input_score3)) ||
+               !InsideRange(Convert.ToInt32(info.input_score4)) ||
+               !InsideRange(Convert.ToInt32(info.input_score5)) ||
+               !InsideRange(Convert.ToInt32(info.input_score6)) ||
+               !InsideRange(Convert.ToInt32(info.input_score7)) ||
+               !InsideRange(Convert.ToInt32(info.input_score8)) ||
+               !InsideRange(Convert.ToInt32(info.input_score9)) ||
+               !InsideRange(Convert.ToInt32(info.input_score10)) ||
+               !InsideRange(Convert.ToInt32(info.input_score11)) ||
+               !InsideRange(Convert.ToInt32(info.input_score12)) ||
+               !InsideRange(Convert.ToInt32(info.input_score13)) ||
+               !InsideRange(Convert.ToInt32(info.input_score14)) ||
+               !InsideRange(Convert.ToInt32(info.input_score15)) ||
+               !InsideRange(Convert.ToInt32(info.input_score16)) ||
+               !InsideRange(Convert.ToInt32(info.input_score17)) ||
+               !InsideRange(Convert.ToInt32(info.input_score18)))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

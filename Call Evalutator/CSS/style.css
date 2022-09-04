@@ -5,9 +5,33 @@
     font-size: 20px;
 }
 
+/* Grid style*/
+#grvDati {
+    width: 115px;
+    background-color: #313131;
+}
+
+td > input {
+    color: black !important;
+}
+
+td > select {
+    color: black !important;
+}
+
+#dvImage {
+    margin-left: 20%;
+    margin-top: 38%;
+}
+
+#rdrBtn {
+    width: 40px;
+    padding-top: 12.5%;
+}
+
 
 /* Navigator */
-#navigator{
+#navigator {
     position: absolute;
     background: rgb(49, 49, 49);
     width: 335px;

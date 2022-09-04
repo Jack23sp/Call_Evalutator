@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Call_Evalutator.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Visualizzazione.aspx.cs" Inherits="Call_Evalutator.Visualizzazione" %>
 
 <!DOCTYPE html>
 
@@ -43,32 +43,33 @@
                 <ul id="list_parameters">
                     <li>
                         <label for="agent_name" class="label">Agent Name</label>
-                        <asp:DropDownList required="required" name="agent_name" ID="agent_name" placeholder="Select the agent name" runat="server" class="dropdown filter" AutoPostBack="true" />
+                        <asp:DropDownList name="agent_name" ID="agent_name" placeholder="Select the agent name" runat="server" class="dropdown filter" AutoPostBack="true" />
                     </li>
                     <br />
                     <li>
                         <label for="case_number" class="label">Case Number</label>
-                        <input type="text" style="text-transform: uppercase" id="case_number" name="case_number" size="10" runat="server" class="input filter" required="required" />
+                        <input type="text" style="text-transform: uppercase" id="case_number" name="case_number" size="10" runat="server" class="input filter"/>
                     </li>
                     <br />
                     <li>
                         <label for="date_evaluation" id="lblDate" class="label" runat="server">Date of evaluation</label>
-                        <input type="text" id="date_evaluation" name="date_evaluation" size="10" runat="server" readonly="true" />
+                        <%--<input type="text" id="date_evaluation" name="date_evaluation" size="10" runat="server" readonly="true" />--%>
+                        <input type="date" value="" id="date_evaluation" name="date_evaluation" size="10" runat="server" class="input filter"/>
                     </li>
                     <br />
                     <li>
                         <label for="owner" class="label">Evaluation Owner</label>
-                        <asp:DropDownList required="required" name="owner" ID="owner" placeholder="Select the owner" runat="server" class="dropdown filter" AutoPostBack="true" />
+                        <asp:DropDownList name="owner" ID="owner" placeholder="Select the owner" runat="server" class="dropdown filter" AutoPostBack="true" />
                     </li>
                     <br />
                     <li>
                         <label for="call_date" class="label">Date of call</label>
-                        <input type="date" value="" id="call_date" name="call_date" size="10" runat="server" class="input filter" required="required" />
+                        <input type="date" value="" id="call_date" name="call_date" size="10" runat="server" class="input filter"/>
                     </li>
                     <br />
                     <li>
                         <label for="call_person" class="label">Person in call</label>
-                        <asp:DropDownList required="required" name="call_person" ID="call_person" placeholder="Select a person" runat="server" class="dropdown filter" AutoPostBack="true" />
+                        <asp:DropDownList name="call_person" ID="call_person" placeholder="Select a person" runat="server" class="dropdown filter" AutoPostBack="true" />
                     </li>
                 </ul>
             </div>
@@ -84,83 +85,11 @@
             </div>
             <div id="support">This page has to be considered an official document. In case you need support, please send an email to supervisorIT@it.kruk.eu</div>
         </section>
-        <section id="printarea">
-            <!-- Body of webapp -->
-            <div>
-                <h2 id="h2_1">Elementi comuni a tutte le conversazioni</h2>
-            </div>
-            <div>
-                <p id="p1">Apertura e contratto: presentazione azienda, identificazione cliente, scopo della chiamata, spiegazione del caso.</p>
-                <p id="p2">Informazione al cliente su registrazione chiamata (Solo chiamate OUC).</p>
-                <p id="p3">Ricerca della motivazione a pagare: l'advisor fa emergere la volontá del cliente a pagare.</p>
-                <p id="p4">Gestione delle obiezioni del cliente: uso di argomentazione tecniche e legali.</p>
-                <p id="p5">Budget e Qtab (compilato correttamente).</p>
-                <p id="p6">Negoziazione: l'advisor segue lo standard e propone la soluzione piu appropriata (ARR, BUCKET).</p>
-                <p id="p7">L'advisor ha usato le note delle conversazioni precedenti per essere più efficace col cliente.</p>
-                <p id="p8">Chiusura: l'advisor ha preso la garanzia.</p>
-            </div>
-            <div>
-                <h2 id="h2_2">Linguaggio ed Approccio</h2>
-            </div>
-            <div>
-                <p id="p9">L'advisor ha condotto la chiamata con un approccio proattivo (assertivitá e determinazione).</p>
-                <p id="p10">Uso corretto del linguaggio, adatto al cliente.</p>
-                <p id="p11">Uso corretto della voce, adeguato al tipo di cliente.</p>
-                <p id="p12">Gestione corretta delle emozioni.</p>
-            </div>
-            <div>
-                <h2 id="h2_3">Procedure obligatorie</h2>
-            </div>
-            <div>
-                <p id="p13">Conoscenza delle procedure.</p>
-                <p id="p14">Acquisizione o conferma dei dati del cliente.</p>
-                <p id="p15">L'advisor ha seguito lo standard della firma? (eSignature - EMU - Invio per mail).</p>
-                <p id="p16">L'advisor ha correttamente presentato eKRUK e deadline del link di attivazione?</p>
-                <p id="p17">Corretto uso dello standard delle note, dei codici e della documentazione.</p>
-            </div>
-            <div>
-                <h2 id="h2_4">Obiettivo</h2>
-            </div>
-            <div>
-                <p id="p18">Ha fatto tutto il possibile per ottenere la soluzione migliore?</p>
-            </div>
-            <div>
-                <!-- input score -->
-                <p id="score1">Score</p>
-                <input type="number" name="score" value="" min="1" max="3" id="input_score1" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score2" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score3" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score4" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score5" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score6" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score7" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score8" class="input" runat="server" />
-                <p id="score2">Score</p>
-                <input type="number" name="score" value="" min="1" max="3" id="input_score9" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score10" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score11" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score12" class="input" runat="server" />
-                <p id="score3">Score</p>
-                <input type="number" name="score" value="" min="1" max="3" id="input_score13" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score14" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score15" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score16" class="input" runat="server" />
-                <input type="number" name="score" value="" min="1" max="3" id="input_score17" class="input" runat="server" />
-                <p id="score4">Score</p>
-                <input type="number" name="score" value="" min="1" max="3" id="input_score18" class="input" runat="server" />
-                <div id="dvImage" runat="server">
-                    <asp:ImageButton id="rdrBtn" runat="server" OnClientClick="TransferToVisualize();" OnClick="rdrBtn_Click" ImageUrl="~/images/visualize.png" CausesValidation="false" />
-                </div>
-            </div>
-            <div id="title_print">
-                <h1>Call Evaluator</h1>
-            </div>
-        </section>
-        <div id="divGrv" style="width: 79%; height: 100%;  margin-left: 380px; margin-top: 479px; overflow-x:scroll;" runat="server" Visible="false">
+        <div style="width: 79%; height: 100%;  margin-left: 380px; margin-top: 479px; overflow-x:scroll;">
             <asp:GridView ID="grvDati" runat="server" Style="width: 115px;" 
                 PagerSettings-Visible="true" 
                 PagerSettings-Mode="NextPreviousFirstLast" 
-                PageSize="2" AllowPaging="true" 
+                PageSize="20" AllowPaging="true" 
                 AllowSorting="true" 
                 AutoGenerateColumns="false" 
                 DataKeyNames="Id" 
