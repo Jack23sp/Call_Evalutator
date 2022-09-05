@@ -96,6 +96,42 @@ namespace Call_Evalutator
         protected global::System.Web.UI.WebControls.ImageButton confirm_button;
 
         /// <summary>
+        /// Controllo divExport.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divExport;
+
+        /// <summary>
+        /// Controllo imgExl.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgExl;
+
+        /// <summary>
+        /// Controllo imgCsv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCsv;
+
+        /// <summary>
+        /// Controllo divGrid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGrid;
+
+        /// <summary>
         /// Controllo grvDati.
         /// </summary>
         /// <remarks>

@@ -48,13 +48,13 @@
                     <br />
                     <li>
                         <label for="case_number" class="label">Case Number</label>
-                        <input type="text" style="text-transform: uppercase" id="case_number" name="case_number" size="10" runat="server" class="input filter"/>
+                        <input type="text" style="text-transform: uppercase" id="case_number" name="case_number" size="10" runat="server" class="input filter" />
                     </li>
                     <br />
                     <li>
                         <label for="date_evaluation" id="lblDate" class="label" runat="server">Date of evaluation</label>
                         <%--<input type="text" id="date_evaluation" name="date_evaluation" size="10" runat="server" readonly="true" />--%>
-                        <input type="date" value="" id="date_evaluation" name="date_evaluation" size="10" runat="server" class="input filter"/>
+                        <input type="date" value="" id="date_evaluation" name="date_evaluation" size="10" runat="server" class="input filter" />
                     </li>
                     <br />
                     <li>
@@ -64,7 +64,7 @@
                     <br />
                     <li>
                         <label for="call_date" class="label">Date of call</label>
-                        <input type="date" value="" id="call_date" name="call_date" size="10" runat="server" class="input filter"/>
+                        <input type="date" value="" id="call_date" name="call_date" size="10" runat="server" class="input filter" />
                     </li>
                     <br />
                     <li>
@@ -85,33 +85,36 @@
             </div>
             <div id="support">This page has to be considered an official document. In case you need support, please send an email to supervisorIT@it.kruk.eu</div>
         </section>
-        <div style="width: 79%; height: 100%;  margin-left: 380px; margin-top: 479px; overflow-x:scroll;">
-            <asp:GridView ID="grvDati" runat="server" Style="width: 115px;" 
-                PagerSettings-Visible="true" 
-                PagerSettings-Mode="NextPreviousFirstLast" 
-                PageSize="20" AllowPaging="true" 
-                AllowSorting="true" 
-                AutoGenerateColumns="false" 
-                DataKeyNames="Id" 
-                OnPageIndexChanging="grvDati_PageIndexChanging" 
-                OnRowCancelingEdit="grvDati_RowCancelingEdit" 
-                OnRowDeleting="grvDati_RowDeleting" 
-                OnRowEditing="grvDati_RowEditing" 
-                EmptyDataText="Non sono stati trovati record per la ricerca effettuata" 
-                OnRowCreated="grvDati_RowCreated" 
-                OnRowDataBound="GrvDati_RowDataBound" 
+        <div id="divExport" runat="server">
+            <asp:ImageButton ID="imgExl" runat="server" OnClick="imgExl_Click" ImageUrl="~/images/excel.png" />
+            <asp:ImageButton ID="imgCsv" runat="server" OnClick="imgCsv_Click" ImageUrl="~/images/csv.png" />
+        </div>
+        <div id="divGrid" runat="server" style="width: 79%; height: 100%; margin-left: 380px; margin-top: 20px; overflow-x: scroll;">
+            <asp:GridView ID="grvDati" runat="server" Style="width: 115px;"
+                PagerSettings-Visible="true"
+                PagerSettings-Mode="NextPreviousFirstLast"
+                PageSize="20" AllowPaging="true"
+                AllowSorting="true"
+                AutoGenerateColumns="false"
+                DataKeyNames="Id"
+                OnPageIndexChanging="grvDati_PageIndexChanging"
+                OnRowCancelingEdit="grvDati_RowCancelingEdit"
+                OnRowDeleting="grvDati_RowDeleting"
+                OnRowEditing="grvDati_RowEditing"
+                EmptyDataText="Non sono stati trovati record per la ricerca effettuata"
+                OnRowCreated="grvDati_RowCreated"
+                OnRowDataBound="GrvDati_RowDataBound"
                 OnRowUpdating="grvDati_RowUpdating">
                 <Columns>
                     <asp:CommandField ShowEditButton="true" CausesValidation="false" />
                     <asp:CommandField ShowDeleteButton="true" CausesValidation="false" />
-                    <asp:BoundField DataField="Id" HeaderText="S.No." Visible="false" />
                     <asp:TemplateField HeaderText="Agent name">
                         <ItemTemplate>
                             <asp:DropDownList ID="ddlAgentName" runat="server">
                             </asp:DropDownList>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="case_number" HeaderText="Case number"/>
+                    <asp:BoundField DataField="case_number" HeaderText="Case number" />
                     <asp:TemplateField HeaderText="Date of evalutation">
                         <ItemTemplate>
                             <asp:TextBox ID="txtDE" runat="server" CssClass="GridCalendar" TextMode="Date" Text='<%# Eval("date_evaluation","{0:yyyy-MM-dd}") %>' />
@@ -134,24 +137,24 @@
                             </asp:DropDownList>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="input_score1" HeaderText="input_score1"/>
-                    <asp:BoundField DataField="input_score2" HeaderText="input_score2"/>
-                    <asp:BoundField DataField="input_score3" HeaderText="input_score3"/>
-                    <asp:BoundField DataField="input_score4" HeaderText="input_score4"/>
-                    <asp:BoundField DataField="input_score5" HeaderText="input_score5"/>
-                    <asp:BoundField DataField="input_score6" HeaderText="input_score6"/>
-                    <asp:BoundField DataField="input_score7" HeaderText="input_score7"/>
-                    <asp:BoundField DataField="input_score8" HeaderText="input_score8"/>
-                    <asp:BoundField DataField="input_score9" HeaderText="input_score9"/>
-                    <asp:BoundField DataField="input_score10" HeaderText="input_score10"/>
-                    <asp:BoundField DataField="input_score11" HeaderText="input_score11"/>
-                    <asp:BoundField DataField="input_score12" HeaderText="input_score12"/>
-                    <asp:BoundField DataField="input_score13" HeaderText="input_score13"/>
-                    <asp:BoundField DataField="input_score14" HeaderText="input_score14"/>
-                    <asp:BoundField DataField="input_score15" HeaderText="input_score15"/>
-                    <asp:BoundField DataField="input_score16" HeaderText="input_score16"/>
-                    <asp:BoundField DataField="input_score17" HeaderText="input_score17"/>
-                    <asp:BoundField DataField="input_score18" HeaderText="input_score18"/>
+                    <asp:BoundField DataField="input_score1" HeaderText="input_score1" />
+                    <asp:BoundField DataField="input_score2" HeaderText="input_score2" />
+                    <asp:BoundField DataField="input_score3" HeaderText="input_score3" />
+                    <asp:BoundField DataField="input_score4" HeaderText="input_score4" />
+                    <asp:BoundField DataField="input_score5" HeaderText="input_score5" />
+                    <asp:BoundField DataField="input_score6" HeaderText="input_score6" />
+                    <asp:BoundField DataField="input_score7" HeaderText="input_score7" />
+                    <asp:BoundField DataField="input_score8" HeaderText="input_score8" />
+                    <asp:BoundField DataField="input_score9" HeaderText="input_score9" />
+                    <asp:BoundField DataField="input_score10" HeaderText="input_score10" />
+                    <asp:BoundField DataField="input_score11" HeaderText="input_score11" />
+                    <asp:BoundField DataField="input_score12" HeaderText="input_score12" />
+                    <asp:BoundField DataField="input_score13" HeaderText="input_score13" />
+                    <asp:BoundField DataField="input_score14" HeaderText="input_score14" />
+                    <asp:BoundField DataField="input_score15" HeaderText="input_score15" />
+                    <asp:BoundField DataField="input_score16" HeaderText="input_score16" />
+                    <asp:BoundField DataField="input_score17" HeaderText="input_score17" />
+                    <asp:BoundField DataField="input_score18" HeaderText="input_score18" />
                 </Columns>
             </asp:GridView>
         </div>

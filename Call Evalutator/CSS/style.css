@@ -29,6 +29,18 @@ td > select {
     padding-top: 12.5%;
 }
 
+#divExport {
+    height: 30px;
+    margin-left: 90%;
+}
+
+#imgExl{
+    height: 40px;
+}
+
+#imgCsv {
+    height: 40px;
+}
 
 /* Navigator */
 #navigator {

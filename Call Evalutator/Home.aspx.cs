@@ -26,6 +26,8 @@ namespace Call_Evalutator
                 string result = identity.Name.Substring(identity.Name.LastIndexOf('\\') + 1);
 
                 Session["canInsert"] = oper.CheckAuthorization(result, 1).ToString();
+                Session["canVisualize"] = oper.CheckAuthorization(result, 2).ToString();
+                rdrBtn.Visible = Session["canVisualize"].ToString() == "Y" ? true : false;
 
                 Session["Tabella_Eval"] = ConfigurationManager.AppSettings["CallEval"];
                 Session["Tabella_AgentName"] = ConfigurationManager.AppSettings["AgentName"];
@@ -264,7 +266,7 @@ namespace Call_Evalutator
             TextBox cd = (TextBox)grvDati.Rows[e.RowIndex].FindControl("txtCD");
 
             info.agent_name = dl.SelectedItem.Text;
-            info.case_number = ((TextBox)grvDati.Rows[e.RowIndex].Cells[4].Controls[0]).Text;
+            info.case_number = ((TextBox)grvDati.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
             info.date_evaluation = de.Text;
             info.owner = owner.SelectedItem.Text;
             if (Convert.ToDateTime(cd.Text) > DateTime.UtcNow)
@@ -276,24 +278,24 @@ namespace Call_Evalutator
                 info.call_date = cd.Text;
             }
             info.call_person = callPerson.SelectedItem.Text;
-            info.input_score1 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[9].Controls[0]).Text;
-            info.input_score2 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[10].Controls[0]).Text;
-            info.input_score3 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[11].Controls[0]).Text;
-            info.input_score4 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[12].Controls[0]).Text;
-            info.input_score5 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[13].Controls[0]).Text;
-            info.input_score6 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[14].Controls[0]).Text;
-            info.input_score7 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[15].Controls[0]).Text;
-            info.input_score8 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[16].Controls[0]).Text;
-            info.input_score9 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[17].Controls[0]).Text;
-            info.input_score10 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[18].Controls[0]).Text;
-            info.input_score11 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[19].Controls[0]).Text;
-            info.input_score12 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[20].Controls[0]).Text;
-            info.input_score13 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[21].Controls[0]).Text;
-            info.input_score14 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[22].Controls[0]).Text;
-            info.input_score15 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[23].Controls[0]).Text;
-            info.input_score16 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[24].Controls[0]).Text;
-            info.input_score17 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[25].Controls[0]).Text;
-            info.input_score18 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[26].Controls[0]).Text;
+            info.input_score1 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[8].Controls[0]).Text;
+            info.input_score2 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[9].Controls[0]).Text;
+            info.input_score3 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[10].Controls[0]).Text;
+            info.input_score4 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[11].Controls[0]).Text;
+            info.input_score5 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[12].Controls[0]).Text;
+            info.input_score6 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[13].Controls[0]).Text;
+            info.input_score7 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[14].Controls[0]).Text;
+            info.input_score8 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[15].Controls[0]).Text;
+            info.input_score9 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[16].Controls[0]).Text;
+            info.input_score10 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[17].Controls[0]).Text;
+            info.input_score11 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[18].Controls[0]).Text;
+            info.input_score12 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[19].Controls[0]).Text;
+            info.input_score13 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[20].Controls[0]).Text;
+            info.input_score14 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[21].Controls[0]).Text;
+            info.input_score15 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[22].Controls[0]).Text;
+            info.input_score16 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[23].Controls[0]).Text;
+            info.input_score17 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[24].Controls[0]).Text;
+            info.input_score18 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[25].Controls[0]).Text;
             info.flg_rcn = "Y";
             info.last_modifier = identity.Name;
             info.id_modify = Convert.ToInt32(id);

@@ -105,8 +105,20 @@ function AlertSuccessDelete() {
 function AlertFailedDelete() {
     alert("Non e' stato possibile eliminare i dati a causa di un errore!");
 }
+
 function NotAuthorizedToInsert() {
     alert("Non si e' autorizzati ad effettuare l'inserimento! Contattare l'amministratore di sistema.");
+}
+
+function NotAuthorizedToVisualize() {
+    alert("Non si e' autorizzati ad effettuare la visualizzazione! Contattare l'amministratore di sistema.");
+}
+
+function NotAuthorizedToModify() {
+    alert("Non si e' autorizzati a modificare i dati! Contattare l'amministratore di sistema.");
+}
+function NotAuthorizedToDownload() {
+    alert("Non si e' autorizzati ad effettuare il download dei dati! Contattare l'amministratore di sistema.");
 }
 
 function TransferToVisualize() {
@@ -120,6 +132,7 @@ function CallDateError() {
 function CheckData() {
     alert("I campi numerici devo essere compilati con valori da 0 a 3!");
 }
+
 
 function SendMail(cc, body, alert) {
     if (CheckFilled() == true) {

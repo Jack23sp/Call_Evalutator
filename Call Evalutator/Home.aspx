@@ -149,7 +149,7 @@
                 <p id="score4">Score</p>
                 <input type="number" name="score" value="" min="1" max="3" id="input_score18" class="input" runat="server" />
                 <div id="dvImage" runat="server">
-                    <asp:ImageButton id="rdrBtn" runat="server" OnClientClick="TransferToVisualize();" OnClick="rdrBtn_Click" ImageUrl="~/images/visualize.png" CausesValidation="false" />
+                    <asp:ImageButton id="rdrBtn" runat="server" OnClientClick="TransferToVisualize();" OnClick="rdrBtn_Click" ImageUrl="~/images/visualize.png" CausesValidation="false" Visible="false" />
                 </div>
             </div>
             <div id="title_print">

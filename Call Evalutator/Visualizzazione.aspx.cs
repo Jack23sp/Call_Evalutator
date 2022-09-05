@@ -10,6 +10,10 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.IO;
+using System.Text;
+using ClosedXML.Excel;
+using System.Text.RegularExpressions;
 
 namespace Call_Evalutator
 {
@@ -22,6 +26,15 @@ namespace Call_Evalutator
         {
             if (!IsPostBack)
             {
+                divGrid.Visible = false;
+                divExport.Visible = false;
+                WindowsIdentity identity = HttpContext.Current.Request.LogonUserIdentity;
+                string result = identity.Name.Substring(identity.Name.LastIndexOf('\\') + 1);
+
+                Session["canVisualize"] = oper.CheckAuthorization(result, 2).ToString();
+                Session["canModify"] = oper.CheckAuthorization(result, 3).ToString();
+                Session["canDownload"] = oper.CheckAuthorization(result, 4).ToString();
+
 
                 var localDateTime = DateTime.Now.ToString("dd/MM/yyyy");
                 date_evaluation.Value = localDateTime;
@@ -106,6 +119,28 @@ namespace Call_Evalutator
             Session["GridData"] = oper.GetGridDataWithInfo(info);
             grvDati.DataSource = (DataTable)Session["GridData"];
             grvDati.DataBind();
+            divGrid.Visible = true;
+
+            if (((DataTable)Session["GridData"]).Rows.Count == 0)
+            {
+                divExport.Visible = true;
+                imgCsv.Enabled = false;
+                imgExl.Enabled = false;
+            }
+            else
+            {
+                divExport.Visible = true;
+                if (Session["canDownload"].ToString() == "Y")
+                {
+                    imgCsv.Enabled = true;
+                    imgExl.Enabled = true;
+                }
+                else
+                {
+                    imgCsv.Enabled = false;
+                    imgExl.Enabled = false;
+                }
+            }
         }
         protected void confirm_button_Click(object sender, EventArgs e)
         {
@@ -133,7 +168,17 @@ namespace Call_Evalutator
                 info.call_date = call_date.Value;
             }
             Session["Info"] = info;
-            GrvDatiBind(info);
+
+            if (Session["canVisualize"].ToString() == "N" || string.IsNullOrEmpty(Session["canVisualize"].ToString()))
+            {
+                ClientScript.RegisterStartupScript
+                        (GetType(), Guid.NewGuid().ToString(), "NotAuthorizedToVisualize();", true);
+                return;
+            }
+            else
+            {
+                GrvDatiBind(info);
+            }
         }
 
         protected void GrvDati_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -189,6 +234,13 @@ namespace Call_Evalutator
 
         protected void grvDati_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            if (Session["canModify"].ToString() == "N" || string.IsNullOrEmpty(Session["canModify"].ToString()))
+            {
+                ClientScript.RegisterStartupScript
+                        (GetType(), Guid.NewGuid().ToString(), "NotAuthorizedToModify();", true);
+                grvDati.EditIndex = -1;
+                return;
+            }
             string id = grvDati.DataKeys[e.RowIndex]["Id"].ToString();
 
             WindowsIdentity identity = HttpContext.Current.Request.LogonUserIdentity;
@@ -207,29 +259,29 @@ namespace Call_Evalutator
             TextBox cd = (TextBox)grvDati.Rows[e.RowIndex].FindControl("txtCD");
 
             info.agent_name = dl.SelectedItem.Text;
-            info.case_number = ((TextBox)grvDati.Rows[e.RowIndex].Cells[4].Controls[0]).Text;
+            info.case_number = ((TextBox)grvDati.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
             info.date_evaluation = de.Text;
             info.owner = owner.SelectedItem.Text;
             info.call_date = cd.Text;            
             info.call_person = callPerson.SelectedItem.Text;
-            info.input_score1 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[9].Controls[0]).Text;
-            info.input_score2 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[10].Controls[0]).Text;
-            info.input_score3 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[11].Controls[0]).Text;
-            info.input_score4 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[12].Controls[0]).Text;
-            info.input_score5 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[13].Controls[0]).Text;
-            info.input_score6 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[14].Controls[0]).Text;
-            info.input_score7 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[15].Controls[0]).Text;
-            info.input_score8 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[16].Controls[0]).Text;
-            info.input_score9 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[17].Controls[0]).Text;
-            info.input_score10 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[18].Controls[0]).Text;
-            info.input_score11 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[19].Controls[0]).Text;
-            info.input_score12 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[20].Controls[0]).Text;
-            info.input_score13 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[21].Controls[0]).Text;
-            info.input_score14 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[22].Controls[0]).Text;
-            info.input_score15 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[23].Controls[0]).Text;
-            info.input_score16 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[24].Controls[0]).Text;
-            info.input_score17 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[25].Controls[0]).Text;
-            info.input_score18 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[26].Controls[0]).Text;
+            info.input_score1 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[8].Controls[0]).Text;
+            info.input_score2 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[9].Controls[0]).Text;
+            info.input_score3 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[10].Controls[0]).Text;
+            info.input_score4 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[11].Controls[0]).Text;
+            info.input_score5 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[12].Controls[0]).Text;
+            info.input_score6 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[13].Controls[0]).Text;
+            info.input_score7 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[14].Controls[0]).Text;
+            info.input_score8 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[15].Controls[0]).Text;
+            info.input_score9 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[16].Controls[0]).Text;
+            info.input_score10 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[17].Controls[0]).Text;
+            info.input_score11 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[18].Controls[0]).Text;
+            info.input_score12 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[19].Controls[0]).Text;
+            info.input_score13 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[20].Controls[0]).Text;
+            info.input_score14 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[21].Controls[0]).Text;
+            info.input_score15 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[22].Controls[0]).Text;
+            info.input_score16 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[23].Controls[0]).Text;
+            info.input_score17 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[24].Controls[0]).Text;
+            info.input_score18 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[25].Controls[0]).Text;
             info.flg_rcn = "Y";
             info.last_modifier = identity.Name;
             info.id_modify = Convert.ToInt32(id);
@@ -291,6 +343,88 @@ namespace Call_Evalutator
                 return false;
             }
             return true;
+        }
+
+        public static string ScrubHtml(string value)
+        {
+            var step1 = Regex.Replace(value, @"<[^>]+>|&nbsp;", "").Trim();
+            var step2 = Regex.Replace(step1, @"\s{2,}", " ");
+            return step2;
+        }
+
+        public void ExportGridToExcel()
+        {
+            DataTable dt = new DataTable();
+            dt = ((DataTable)Session["GridData"]);
+            dt.Columns.RemoveAt(0);
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt, "Call_Evaluation");
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=Call_Evaluation" + DateTime.Now.ToString() +".xlsx");
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+        }
+
+        public void ExportGridToCSV()
+        {
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment;filename=Call_evaluation" + DateTime.Now.ToString() +".csv");
+            Response.Charset = "";
+            Response.ContentType = "application/text";
+            StringBuilder sb = new StringBuilder();
+            DataTable dt = Session["GridData"] as DataTable;
+            // Hide/Remove columns from csv.
+            dt.Columns.RemoveAt(0);// Removes the column at the specified index
+            for (int k = 0; k < dt.Columns.Count; k++)
+            {
+                sb.Append(dt.Columns[k].ColumnName + ';');
+            }
+            sb.Append("\r\n");
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                for (int k = 0; k < dt.Columns.Count; k++)
+                {
+                    sb.Append(dt.Rows[i][k].ToString().Replace(",", ";") + ';');
+                }
+                sb.Append("\r\n");
+            }
+            Response.Output.Write(sb.ToString());
+            Response.Flush();
+            Response.End();
+        }
+        
+        protected void imgCsv_Click(object sender, ImageClickEventArgs e)
+        {
+            if (Session["canDownload"].ToString() == "N" || string.IsNullOrEmpty(Session["canDownload"].ToString()))
+            {
+                ClientScript.RegisterStartupScript
+                        (GetType(), Guid.NewGuid().ToString(), "NotAuthorizedToDownload();", true);
+                return;
+            }
+            ExportGridToCSV();
+        }
+
+        protected void imgExl_Click(object sender, ImageClickEventArgs e)
+        {
+            if (Session["canDownload"].ToString() == "N" || string.IsNullOrEmpty(Session["canDownload"].ToString()))
+            {
+                ClientScript.RegisterStartupScript
+                        (GetType(), Guid.NewGuid().ToString(), "NotAuthorizedToDownload();", true);
+                return;
+            }
+            ExportGridToExcel();
         }
     }
 }
