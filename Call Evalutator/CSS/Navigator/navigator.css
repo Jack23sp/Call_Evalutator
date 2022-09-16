@@ -1,0 +1,412 @@
+﻿form {
+    height: 100%;
+}
+
+.kontext {
+    width: 100%;
+    height: 100%;
+}
+
+    .kontext .layer {
+        position: absolute;
+        width: 100% !important;
+        height: 100% !important;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        /*box-shadow: 0px 0px 120px rgba( 0, 0, 0, 0.8 );*/
+    }
+
+        .kontext .layer.show {
+            visibility: visible;
+        }
+
+    .kontext.capable {
+        -webkit-perspective: 1000px;
+        -moz-perspective: 1000px;
+        perspective: 1000px;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+        .kontext.capable .layer {
+            -webkit-transform: translateZ( -100px );
+            -moz-transform: translateZ( -100px );
+            transform: translateZ( -100px );
+        }
+
+            .kontext.capable .layer.show {
+                -webkit-transform: translateZ( 0px );
+                -moz-transform: translateZ( 0px );
+                transform: translateZ( 0px );
+            }
+
+        .kontext.capable.animate .layer.show.right {
+            -webkit-animation: show-right 1s forwards ease;
+            -moz-animation: show-right 1s forwards ease;
+            animation: show-right 1s forwards ease;
+        }
+
+        .kontext.capable.animate .layer.hide.right {
+            -webkit-animation: hide-right 1s forwards ease;
+            -moz-animation: hide-right 1s forwards ease;
+            animation: hide-right 1s forwards ease;
+        }
+
+        .kontext.capable.animate .layer.show.left {
+            -webkit-animation: show-left 1s forwards ease;
+            -moz-animation: show-left 1s forwards ease;
+            animation: show-left 1s forwards ease;
+        }
+
+        .kontext.capable.animate .layer.hide.left {
+            -webkit-animation: hide-left 1s forwards ease;
+            -moz-animation: hide-left 1s forwards ease;
+            animation: hide-left 1s forwards ease;
+        }
+
+
+/* CSS animation keyframes */
+
+@-webkit-keyframes show-right {
+    0% {
+        -webkit-transform: translateZ( -200px );
+    }
+
+    40% {
+        -webkit-transform: translate( 40%, 0 ) scale( 0.8 ) rotateY( -20deg );
+    }
+
+    100% {
+        -webkit-transform: translateZ( 0px );
+    }
+}
+
+@-webkit-keyframes hide-right {
+    0% {
+        -webkit-transform: translateZ( 0px );
+        visibility: visible;
+    }
+
+    40% {
+        -webkit-transform: translate( -40%, 0 ) scale( 0.8 ) rotateY( 20deg );
+    }
+
+    100% {
+        -webkit-transform: translateZ( -200px );
+        visibility: hidden;
+    }
+}
+
+@-moz-keyframes show-right {
+    0% {
+        -moz-transform: translateZ( -200px );
+    }
+
+    40% {
+        -moz-transform: translate( 40%, 0 ) scale( 0.8 ) rotateY( -20deg );
+    }
+
+    100% {
+        -moz-transform: translateZ( 0px );
+    }
+}
+
+@-moz-keyframes hide-right {
+    0% {
+        -moz-transform: translateZ( 0px );
+        visibility: visible;
+    }
+
+    40% {
+        -moz-transform: translate( -40%, 0 ) scale( 0.8 ) rotateY( 20deg );
+    }
+
+    100% {
+        -moz-transform: translateZ( -200px );
+        visibility: hidden;
+    }
+}
+
+@keyframes show-right {
+    0% {
+        transform: translateZ( -200px );
+    }
+
+    40% {
+        transform: translate( 40%, 0 ) scale( 0.8 ) rotateY( -20deg );
+    }
+
+    100% {
+        transform: translateZ( 0px );
+    }
+}
+
+@keyframes hide-right {
+    0% {
+        transform: translateZ( 0px );
+        visibility: visible;
+    }
+
+    40% {
+        transform: translate( -40%, 0 ) scale( 0.8 ) rotateY( 20deg );
+    }
+
+    100% {
+        transform: translateZ( -200px );
+        visibility: hidden;
+    }
+}
+
+
+@-webkit-keyframes show-left {
+    0% {
+        -webkit-transform: translateZ( -200px );
+    }
+
+    40% {
+        -webkit-transform: translate( -40%, 0 ) scale( 0.8 ) rotateY( 20deg );
+    }
+
+    100% {
+        -webkit-transform: translateZ( 0px );
+    }
+}
+
+@-webkit-keyframes hide-left {
+    0% {
+        -webkit-transform: translateZ( 0px );
+        visibility: visible;
+    }
+
+    40% {
+        -webkit-transform: translate( 40%, 0 ) scale( 0.8 ) rotateY( -20deg );
+    }
+
+    100% {
+        -webkit-transform: translateZ( -200px );
+        visibility: hidden;
+    }
+}
+
+@-moz-keyframes show-left {
+    0% {
+        -moz-transform: translateZ( -200px );
+    }
+
+    40% {
+        -moz-transform: translate( -40%, 0 ) scale( 0.8 ) rotateY( 20deg );
+    }
+
+    100% {
+        -moz-transform: translateZ( 0px );
+    }
+}
+
+@-moz-keyframes hide-left {
+    0% {
+        -moz-transform: translateZ( 0px );
+        visibility: visible;
+    }
+
+    40% {
+        -moz-transform: translate( 40%, 0 ) scale( 0.8 ) rotateY( -20deg );
+    }
+
+    100% {
+        -moz-transform: translateZ( -200px );
+        visibility: hidden;
+    }
+}
+
+@keyframes show-left {
+    0% {
+        transform: translateZ( -200px );
+    }
+
+    40% {
+        transform: translate( -40%, 0 ) scale( 0.8 ) rotateY( 20deg );
+    }
+
+    100% {
+        transform: translateZ( 0px );
+    }
+}
+
+@keyframes hide-left {
+    0% {
+        transform: translateZ( 0px );
+        visibility: visible;
+    }
+
+    40% {
+        transform: translate( 40%, 0 ) scale( 0.8 ) rotateY( -20deg );
+    }
+
+    100% {
+        transform: translateZ( -200px );
+        visibility: hidden;
+    }
+}
+
+
+/* Dimmer */
+
+.kontext .layer .dimmer {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    background: transparent;
+}
+
+.kontext.capable.animate .layer .dimmer {
+    -webkit-transition: background 1s ease;
+    -moz-transition: background 1s ease;
+    transition: background 1s ease;
+}
+
+.kontext.capable.animate .layer.hide .dimmer {
+    visibility: visible;
+    background: rgba( 0, 0, 0, 0.7 );
+}
+
+
+
+
+/* Styles for the demo */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+    background-color: #222;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=);
+    background-repeat: repeat;
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    color: #fff;
+}
+
+.layer {
+    text-align: center;
+    text-shadow: 1px 1px 0px rgba( 0, 0, 0, 0.1 );
+}
+
+    /*    .layer h2 {
+        position: relative;
+        top: 20%;
+        margin: 0;
+        font-size: 6.25em;
+    }*/
+
+    .layer p {
+        position: relative;
+        top: 20%;
+        margin: 0;
+    }
+
+    .layer.one {
+        background-color: #b3cef1 !important;
+        background: linear-gradient(rgba(179, 206, 241, 0.9),rgba(179, 206, 241, 0.9)), url('/images/2601039697d8c8c730ec09e78a8395e0.png') center;
+        background-size: cover;
+        height: 100% !important;
+    }
+
+    .layer.two {
+        background: #95dc84 !important;
+        height: 100% !important;
+    }
+
+    .layer.three {
+        background: #64b9d2 !important;
+        height: 100% !important;
+    }
+
+
+.bullets {
+    position: absolute;
+    width: 50%;
+    bottom: 20px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    margin-left: 24.6%;
+}
+
+    .bullets button {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin: 0 3px;
+        background: rgba( 255, 255, 255, 0.5 );
+        box-shadow: 0px 0px 4px rgba( 0, 0, 0, 0.2 );
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
+    }
+
+        .bullets button:hover {
+            background: rgba( 255, 255, 255, 0.8 );
+        }
+
+        .bullets button.active {
+            cursor: default;
+            background: #fff;
+        }
+
+.imgFirstBullet {
+    height: 60px;
+    width: 60px;
+    position: fixed;
+    margin-top: 46%;
+    margin-left: -0.2%;
+}
+
+.imgSecondBullet {
+    height: 60px;
+    width: 60px;
+    position: fixed;
+    margin-top: 46%;
+    margin-left: 3.5%;
+}
+
+.imgThirdBullet {
+    height: 75px;
+    width: 75px;
+    position: fixed;
+    margin-top: 45.5%;
+    margin-left: 6.6%;
+}
+
+.imgBullet {
+    transition: transform .2s;
+}
+
+.layer > .imgBullet:hover {
+    transform: scale(1.5);
+}
+
+@media screen and (max-width: 400px) {
+    /*    body {
+        font-size: 12px;
+    }*/
+    /*
+    .layer h2 {
+        font-size: 5em;
+    }*/
+
+    .bullets button {
+        margin: 0 6px;
+    }
+}

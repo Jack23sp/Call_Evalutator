@@ -149,83 +149,17 @@
                 <p id="score4">Score</p>
                 <input type="number" name="score" value="" min="1" max="3" id="input_score18" class="input" runat="server" />
                 <div id="dvImage" runat="server">
-                    <asp:ImageButton id="rdrBtn" runat="server" OnClientClick="TransferToVisualize();" OnClick="rdrBtn_Click" ImageUrl="~/images/visualize.png" CausesValidation="false" Visible="false" />
+                    <asp:ImageButton ID="rdrBtn" runat="server" OnClientClick="TransferToVisualize();" OnClick="rdrBtn_Click" ImageUrl="~/images/visualize.png" CausesValidation="false" Visible="false" />
                 </div>
             </div>
             <div id="title_print">
                 <h1>Call Evaluator</h1>
             </div>
+            <h2 id="h2_5">Punti di forza</h2>
+            <asp:TextBox TextMode="MultiLine" name="strenght_weakness" value="" ID="strenght" class="input" runat="server" />
+            <h2 id="h2_6">Punti di debolezza</h2>
+            <asp:TextBox TextMode="MultiLine" name="strenght_weakness" value="" ID="weakness" class="input" runat="server" />
         </section>
-        <div id="divGrv" style="width: 79%; height: 100%;  margin-left: 380px; margin-top: 479px; overflow-x:scroll;" runat="server" Visible="false">
-            <asp:GridView ID="grvDati" runat="server" Style="width: 115px;" 
-                PagerSettings-Visible="true" 
-                PagerSettings-Mode="NextPreviousFirstLast" 
-                PageSize="2" AllowPaging="true" 
-                AllowSorting="true" 
-                AutoGenerateColumns="false" 
-                DataKeyNames="Id" 
-                OnPageIndexChanging="grvDati_PageIndexChanging" 
-                OnRowCancelingEdit="grvDati_RowCancelingEdit" 
-                OnRowDeleting="grvDati_RowDeleting" 
-                OnRowEditing="grvDati_RowEditing" 
-                EmptyDataText="Non sono stati trovati record per la ricerca effettuata" 
-                OnRowCreated="grvDati_RowCreated" 
-                OnRowDataBound="GrvDati_RowDataBound" 
-                OnRowUpdating="grvDati_RowUpdating">
-                <Columns>
-                    <asp:CommandField ShowEditButton="true" CausesValidation="false" />
-                    <asp:CommandField ShowDeleteButton="true" CausesValidation="false" />
-                    <asp:BoundField DataField="Id" HeaderText="S.No." Visible="false" />
-                    <asp:TemplateField HeaderText="Agent name">
-                        <ItemTemplate>
-                            <asp:DropDownList ID="ddlAgentName" runat="server">
-                            </asp:DropDownList>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="case_number" HeaderText="Case number"/>
-                    <asp:TemplateField HeaderText="Date of evalutation">
-                        <ItemTemplate>
-                            <asp:TextBox ID="txtDE" runat="server" CssClass="GridCalendar" TextMode="Date" Text='<%# Eval("date_evaluation","{0:yyyy-MM-dd}") %>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Owner">
-                        <ItemTemplate>
-                            <asp:DropDownList ID="ddlOwner" runat="server">
-                            </asp:DropDownList>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Call date">
-                        <ItemTemplate>
-                            <asp:TextBox ID="txtCD" runat="server" CssClass="GridCalendar" TextMode="Date" Text='<%# Eval("call_date","{0:yyyy-MM-dd}") %>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Person in call">
-                        <ItemTemplate>
-                            <asp:DropDownList ID="ddlPersonCall" runat="server">
-                            </asp:DropDownList>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="input_score1" HeaderText="input_score1"/>
-                    <asp:BoundField DataField="input_score2" HeaderText="input_score2"/>
-                    <asp:BoundField DataField="input_score3" HeaderText="input_score3"/>
-                    <asp:BoundField DataField="input_score4" HeaderText="input_score4"/>
-                    <asp:BoundField DataField="input_score5" HeaderText="input_score5"/>
-                    <asp:BoundField DataField="input_score6" HeaderText="input_score6"/>
-                    <asp:BoundField DataField="input_score7" HeaderText="input_score7"/>
-                    <asp:BoundField DataField="input_score8" HeaderText="input_score8"/>
-                    <asp:BoundField DataField="input_score9" HeaderText="input_score9"/>
-                    <asp:BoundField DataField="input_score10" HeaderText="input_score10"/>
-                    <asp:BoundField DataField="input_score11" HeaderText="input_score11"/>
-                    <asp:BoundField DataField="input_score12" HeaderText="input_score12"/>
-                    <asp:BoundField DataField="input_score13" HeaderText="input_score13"/>
-                    <asp:BoundField DataField="input_score14" HeaderText="input_score14"/>
-                    <asp:BoundField DataField="input_score15" HeaderText="input_score15"/>
-                    <asp:BoundField DataField="input_score16" HeaderText="input_score16"/>
-                    <asp:BoundField DataField="input_score17" HeaderText="input_score17"/>
-                    <asp:BoundField DataField="input_score18" HeaderText="input_score18"/>
-                </Columns>
-            </asp:GridView>
-        </div>
         <input type="hidden" id="cc_" runat="server" visible="true" />
         <input type="hidden" id="body_" runat="server" visible="true" />
         <input type="hidden" id="alert_mail_" runat="server" visible="true" />

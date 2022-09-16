@@ -114,15 +114,6 @@ namespace Call_Evalutator
         protected global::System.Web.UI.WebControls.ImageButton imgExl;
 
         /// <summary>
-        /// Controllo imgCsv.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgCsv;
-
-        /// <summary>
         /// Controllo divGrid.
         /// </summary>
         /// <remarks>

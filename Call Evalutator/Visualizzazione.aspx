@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Visualizzazione.aspx.cs" Inherits="Call_Evalutator.Visualizzazione" %>
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <!DOCTYPE html>
 
@@ -23,6 +24,7 @@
         <section id="navigators">
             <!-- left navigator -->
             <div id="navigator">
+                <asp:Chart runat="server" RenderType="ImageMap"></asp:Chart>
                 <div id="navigator2"></div>
                 <div id="navigator3"></div>
                 <img src="images/favicon.png" alt="Logo" width="40px" id="logo" />
@@ -87,7 +89,6 @@
         </section>
         <div id="divExport" runat="server">
             <asp:ImageButton ID="imgExl" runat="server" OnClick="imgExl_Click" ImageUrl="~/images/excel.png" />
-            <asp:ImageButton ID="imgCsv" runat="server" OnClick="imgCsv_Click" ImageUrl="~/images/csv.png" />
         </div>
         <div id="divGrid" runat="server" style="width: 79%; height: 100%; margin-left: 380px; margin-top: 20px; overflow-x: scroll;">
             <asp:GridView ID="grvDati" runat="server" Style="width: 115px;"
@@ -137,24 +138,150 @@
                             </asp:DropDownList>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="input_score1" HeaderText="input_score1" />
-                    <asp:BoundField DataField="input_score2" HeaderText="input_score2" />
-                    <asp:BoundField DataField="input_score3" HeaderText="input_score3" />
-                    <asp:BoundField DataField="input_score4" HeaderText="input_score4" />
-                    <asp:BoundField DataField="input_score5" HeaderText="input_score5" />
-                    <asp:BoundField DataField="input_score6" HeaderText="input_score6" />
-                    <asp:BoundField DataField="input_score7" HeaderText="input_score7" />
-                    <asp:BoundField DataField="input_score8" HeaderText="input_score8" />
-                    <asp:BoundField DataField="input_score9" HeaderText="input_score9" />
-                    <asp:BoundField DataField="input_score10" HeaderText="input_score10" />
-                    <asp:BoundField DataField="input_score11" HeaderText="input_score11" />
-                    <asp:BoundField DataField="input_score12" HeaderText="input_score12" />
-                    <asp:BoundField DataField="input_score13" HeaderText="input_score13" />
-                    <asp:BoundField DataField="input_score14" HeaderText="input_score14" />
-                    <asp:BoundField DataField="input_score15" HeaderText="input_score15" />
-                    <asp:BoundField DataField="input_score16" HeaderText="input_score16" />
-                    <asp:BoundField DataField="input_score17" HeaderText="input_score17" />
-                    <asp:BoundField DataField="input_score18" HeaderText="input_score18" />
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_1" CssClass="score" ToolTip="Apertura e contratto: presentazione azienda, identificazione cliente, scopo della chiamata, spiegazione del caso." Text="Score 1"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score1") %>' ID="score_1" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_2" CssClass="score" ToolTip="Informazione al cliente su registrazione chiamata (Solo chiamate OUC)." Text="Score 2"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score2") %>' ID="score_2" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_3" CssClass="score" ToolTip="Ricerca della motivazione a pagare: l'advisor fa emergere la volontá del cliente a pagare." Text="Score 3"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score3") %>' ID="score_3" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_4" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 4"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score4") %>' ID="score_4" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_5" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 5"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score5") %>' ID="score_5" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_6" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 6"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score6") %>' ID="score_6" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_7" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 7"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score7") %>' ID="score_7" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_8" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 8"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score8") %>' ID="score_8" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_9" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 9"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score9") %>' ID="score_9" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_10" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 10"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score10") %>' ID="score_10" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_11" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 11"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score11") %>' ID="score_11" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_12" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 12"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score12") %>' ID="score_12" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_13" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 13"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score13") %>' ID="score_13" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_14" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 14"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score14") %>' ID="score_14" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_15" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 15"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score15") %>' ID="score_15" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_16" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 16"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score16") %>' ID="score_16" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_17" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 17"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score17") %>' ID="score_17" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:Label runat="server" ID="score_18" CssClass="score" ToolTip="TEST_ToolTip" Text="Score 18"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:TextBox Text='<%# Bind("input_score18") %>' ID="score_18" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </div>

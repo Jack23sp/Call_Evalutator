@@ -14,6 +14,8 @@ using System.IO;
 using System.Text;
 using ClosedXML.Excel;
 using System.Text.RegularExpressions;
+using System.Reflection;
+using System.Threading;
 
 namespace Call_Evalutator
 {
@@ -26,6 +28,7 @@ namespace Call_Evalutator
         {
             if (!IsPostBack)
             {
+
                 divGrid.Visible = false;
                 divExport.Visible = false;
                 WindowsIdentity identity = HttpContext.Current.Request.LogonUserIdentity;
@@ -98,6 +101,43 @@ namespace Call_Evalutator
             //PERSON IN CALL
             DropDownList ddlPersonCall = (DropDownList)grvDati.Rows[e.NewEditIndex].FindControl("ddlPersonCall");
             ddlPersonCall.Enabled = true;
+            //SCORE
+            TextBox score1 = (grvDati.Rows[e.NewEditIndex].FindControl("score_1") as TextBox);
+            score1.Enabled = true;
+            TextBox score2 = (grvDati.Rows[e.NewEditIndex].FindControl("score_2") as TextBox);
+            score2.Enabled = true;
+            TextBox score3 = (grvDati.Rows[e.NewEditIndex].FindControl("score_3") as TextBox);
+            score3.Enabled = true;
+            TextBox score4 = (grvDati.Rows[e.NewEditIndex].FindControl("score_4") as TextBox);
+            score4.Enabled = true;
+            TextBox score5 = (grvDati.Rows[e.NewEditIndex].FindControl("score_5") as TextBox);
+            score5.Enabled = true;
+            TextBox score6 = (grvDati.Rows[e.NewEditIndex].FindControl("score_6") as TextBox);
+            score6.Enabled = true;
+            TextBox score7 = (grvDati.Rows[e.NewEditIndex].FindControl("score_7") as TextBox);
+            score7.Enabled = true;
+            TextBox score8 = (grvDati.Rows[e.NewEditIndex].FindControl("score_8") as TextBox);
+            score8.Enabled = true;
+            TextBox score9 = (grvDati.Rows[e.NewEditIndex].FindControl("score_9") as TextBox);
+            score9.Enabled = true;
+            TextBox score10 = (grvDati.Rows[e.NewEditIndex].FindControl("score_10") as TextBox);
+            score10.Enabled = true;
+            TextBox score11 = (grvDati.Rows[e.NewEditIndex].FindControl("score_11") as TextBox);
+            score11.Enabled = true;
+            TextBox score12 = (grvDati.Rows[e.NewEditIndex].FindControl("score_12") as TextBox);
+            score12.Enabled = true;
+            TextBox score13 = (grvDati.Rows[e.NewEditIndex].FindControl("score_13") as TextBox);
+            score13.Enabled = true;
+            TextBox score14 = (grvDati.Rows[e.NewEditIndex].FindControl("score_14") as TextBox);
+            score14.Enabled = true;
+            TextBox score15 = (grvDati.Rows[e.NewEditIndex].FindControl("score_15") as TextBox);
+            score15.Enabled = true;
+            TextBox score16 = (grvDati.Rows[e.NewEditIndex].FindControl("score_16") as TextBox);
+            score16.Enabled = true;
+            TextBox score17 = (grvDati.Rows[e.NewEditIndex].FindControl("score_17") as TextBox);
+            score17.Enabled = true;
+            TextBox score18 = (grvDati.Rows[e.NewEditIndex].FindControl("score_18") as TextBox);
+            score18.Enabled = true;
 
         }
 
@@ -124,7 +164,6 @@ namespace Call_Evalutator
             if (((DataTable)Session["GridData"]).Rows.Count == 0)
             {
                 divExport.Visible = true;
-                imgCsv.Enabled = false;
                 imgExl.Enabled = false;
             }
             else
@@ -132,12 +171,10 @@ namespace Call_Evalutator
                 divExport.Visible = true;
                 if (Session["canDownload"].ToString() == "Y")
                 {
-                    imgCsv.Enabled = true;
                     imgExl.Enabled = true;
                 }
                 else
                 {
-                    imgCsv.Enabled = false;
                     imgExl.Enabled = false;
                 }
             }
@@ -224,7 +261,43 @@ namespace Call_Evalutator
                 DataRowView dr2 = (DataRowView)e.Row.DataItem;
                 string field3 = dr2["call_person"].ToString();
                 ddlPersonCall.Items.FindByText(field3).Selected = true;
-
+                //SCORE
+                TextBox score1 = (e.Row.FindControl("score_1") as TextBox);
+                score1.Enabled = false;
+                TextBox score2 = (e.Row.FindControl("score_2") as TextBox);
+                score2.Enabled = false;
+                TextBox score3 = (e.Row.FindControl("score_3") as TextBox);
+                score3.Enabled = false;
+                TextBox score4 = (e.Row.FindControl("score_4") as TextBox);
+                score4.Enabled = false;
+                TextBox score5 = (e.Row.FindControl("score_5") as TextBox);
+                score5.Enabled = false;
+                TextBox score6 = (e.Row.FindControl("score_6") as TextBox);
+                score6.Enabled = false;
+                TextBox score7 = (e.Row.FindControl("score_7") as TextBox);
+                score7.Enabled = false;
+                TextBox score8 = (e.Row.FindControl("score_8") as TextBox);
+                score8.Enabled = false;
+                TextBox score9 = (e.Row.FindControl("score_9") as TextBox);
+                score9.Enabled = false;
+                TextBox score10 = (e.Row.FindControl("score_10") as TextBox);
+                score10.Enabled = false;
+                TextBox score11 = (e.Row.FindControl("score_11") as TextBox);
+                score11.Enabled = false;
+                TextBox score12 = (e.Row.FindControl("score_12") as TextBox);
+                score12.Enabled = false;
+                TextBox score13 = (e.Row.FindControl("score_13") as TextBox);
+                score13.Enabled = false;
+                TextBox score14 = (e.Row.FindControl("score_14") as TextBox);
+                score14.Enabled = false;
+                TextBox score15 = (e.Row.FindControl("score_15") as TextBox);
+                score15.Enabled = false;
+                TextBox score16 = (e.Row.FindControl("score_16") as TextBox);
+                score16.Enabled = false;
+                TextBox score17 = (e.Row.FindControl("score_17") as TextBox);
+                score17.Enabled = false;
+                TextBox score18 = (e.Row.FindControl("score_18") as TextBox);
+                score18.Enabled = false;
             }
         }
 
@@ -241,6 +314,8 @@ namespace Call_Evalutator
                 grvDati.EditIndex = -1;
                 return;
             }
+            ClientScript.RegisterStartupScript
+                        (GetType(), Guid.NewGuid().ToString(), "AlertUpdate();", true);
             string id = grvDati.DataKeys[e.RowIndex]["Id"].ToString();
 
             WindowsIdentity identity = HttpContext.Current.Request.LogonUserIdentity;
@@ -262,37 +337,37 @@ namespace Call_Evalutator
             info.case_number = ((TextBox)grvDati.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
             info.date_evaluation = de.Text;
             info.owner = owner.SelectedItem.Text;
-            info.call_date = cd.Text;            
+            info.call_date = cd.Text;
             info.call_person = callPerson.SelectedItem.Text;
-            info.input_score1 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[8].Controls[0]).Text;
-            info.input_score2 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[9].Controls[0]).Text;
-            info.input_score3 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[10].Controls[0]).Text;
-            info.input_score4 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[11].Controls[0]).Text;
-            info.input_score5 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[12].Controls[0]).Text;
-            info.input_score6 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[13].Controls[0]).Text;
-            info.input_score7 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[14].Controls[0]).Text;
-            info.input_score8 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[15].Controls[0]).Text;
-            info.input_score9 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[16].Controls[0]).Text;
-            info.input_score10 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[17].Controls[0]).Text;
-            info.input_score11 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[18].Controls[0]).Text;
-            info.input_score12 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[19].Controls[0]).Text;
-            info.input_score13 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[20].Controls[0]).Text;
-            info.input_score14 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[21].Controls[0]).Text;
-            info.input_score15 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[22].Controls[0]).Text;
-            info.input_score16 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[23].Controls[0]).Text;
-            info.input_score17 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[24].Controls[0]).Text;
-            info.input_score18 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[25].Controls[0]).Text;
+            info.input_score1 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[8].Controls[1]).Text;
+            info.input_score2 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[9].Controls[1]).Text;
+            info.input_score3 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[10].Controls[1]).Text;
+            info.input_score4 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[11].Controls[1]).Text;
+            info.input_score5 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[12].Controls[1]).Text;
+            info.input_score6 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[13].Controls[1]).Text;
+            info.input_score7 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[14].Controls[1]).Text;
+            info.input_score8 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[15].Controls[1]).Text;
+            info.input_score9 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[16].Controls[1]).Text;
+            info.input_score10 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[17].Controls[1]).Text;
+            info.input_score11 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[18].Controls[1]).Text;
+            info.input_score12 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[19].Controls[1]).Text;
+            info.input_score13 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[20].Controls[1]).Text;
+            info.input_score14 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[21].Controls[1]).Text;
+            info.input_score15 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[22].Controls[1]).Text;
+            info.input_score16 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[23].Controls[1]).Text;
+            info.input_score17 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[24].Controls[1]).Text;
+            info.input_score18 = ((TextBox)grvDati.Rows[e.RowIndex].Cells[25].Controls[1]).Text;
             info.flg_rcn = "Y";
             info.last_modifier = identity.Name;
             info.id_modify = Convert.ToInt32(id);
 
-            if(Convert.ToDateTime(info.call_date) > DateTime.UtcNow || Convert.ToDateTime(info.call_date) > Convert.ToDateTime(info.date_evaluation))
+            if (Convert.ToDateTime(info.call_date) > DateTime.UtcNow || Convert.ToDateTime(info.call_date) > Convert.ToDateTime(info.date_evaluation))
             {
                 ClientScript.RegisterStartupScript
                         (GetType(), Guid.NewGuid().ToString(), "CallDateError();", true);
                 return;
             }
-            if(!CheckConsistencyData())
+            if (!CheckConsistencyData())
             {
                 ClientScript.RegisterStartupScript
                     (GetType(), Guid.NewGuid().ToString(), "CheckData();", true);
@@ -316,7 +391,7 @@ namespace Call_Evalutator
 
         public bool InsideRange(int value)
         {
-            return value >= 0 && value <= 3; 
+            return value >= 0 && value <= 3;
         }
 
         public bool CheckConsistencyData()
@@ -365,7 +440,7 @@ namespace Call_Evalutator
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename=Call_Evaluation" + DateTime.Now.ToString() +".xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename=Call_Evaluation" + DateTime.Now.ToString() + ".xlsx");
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                 {
                     wb.SaveAs(MyMemoryStream);
@@ -376,45 +451,6 @@ namespace Call_Evalutator
             }
         }
 
-        public void ExportGridToCSV()
-        {
-            Response.Clear();
-            Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=Call_evaluation" + DateTime.Now.ToString() +".csv");
-            Response.Charset = "";
-            Response.ContentType = "application/text";
-            StringBuilder sb = new StringBuilder();
-            DataTable dt = Session["GridData"] as DataTable;
-            // Hide/Remove columns from csv.
-            dt.Columns.RemoveAt(0);// Removes the column at the specified index
-            for (int k = 0; k < dt.Columns.Count; k++)
-            {
-                sb.Append(dt.Columns[k].ColumnName + ';');
-            }
-            sb.Append("\r\n");
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                for (int k = 0; k < dt.Columns.Count; k++)
-                {
-                    sb.Append(dt.Rows[i][k].ToString().Replace(",", ";") + ';');
-                }
-                sb.Append("\r\n");
-            }
-            Response.Output.Write(sb.ToString());
-            Response.Flush();
-            Response.End();
-        }
-        
-        protected void imgCsv_Click(object sender, ImageClickEventArgs e)
-        {
-            if (Session["canDownload"].ToString() == "N" || string.IsNullOrEmpty(Session["canDownload"].ToString()))
-            {
-                ClientScript.RegisterStartupScript
-                        (GetType(), Guid.NewGuid().ToString(), "NotAuthorizedToDownload();", true);
-                return;
-            }
-            ExportGridToCSV();
-        }
 
         protected void imgExl_Click(object sender, ImageClickEventArgs e)
         {

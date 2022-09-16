@@ -81,6 +81,8 @@ namespace DAL
             cmd.Parameters.AddWithValue("@input_score16", SqlDbType.Int).Value = info.input_score16;
             cmd.Parameters.AddWithValue("@input_score17", SqlDbType.Int).Value = info.input_score17;
             cmd.Parameters.AddWithValue("@input_score18", SqlDbType.Int).Value = info.input_score18;
+            cmd.Parameters.AddWithValue("@streng", SqlDbType.VarChar).Value = info.strenght;
+            cmd.Parameters.AddWithValue("@weak", SqlDbType.VarChar).Value = info.weakness;
             cmd.Parameters.AddWithValue("@flg_rcn", SqlDbType.VarChar).Value = info.flg_rcn;
             cmd.Parameters.AddWithValue("@last_modifier", SqlDbType.VarChar).Value = info.last_modifier;
             SqlParameter error = new SqlParameter();
@@ -153,7 +155,7 @@ namespace DAL
 
         public DataTable ExecuteProcedureJobMacro()
         {
-            SqlCommand cmd = new SqlCommand("DisplayDataChart",con);
+            SqlCommand cmd = new SqlCommand("DisplayDataChart", con);
             cmd.Connection = GetConnection();
             cmd.CommandType = CommandType.StoredProcedure;
             DataTable dt = new DataTable();
@@ -161,7 +163,7 @@ namespace DAL
             cmd.Parameters.AddWithValue("@months", SqlDbType.Int).Value = 0;
             cmd.Parameters.AddWithValue("@argument", SqlDbType.Int).Value = 4;
             return ExeReader(cmd);
-            
+
         }
         public DataTable ExecuteProcedureGridData()
         {
@@ -208,7 +210,7 @@ namespace DAL
         }
 
 
-        public DataTable ExecuteRecordUpdate(string username,int id)
+        public DataTable ExecuteRecordUpdate(string username, int id)
         {
             SqlCommand cmd = new SqlCommand("UpdateData", con);
             cmd.Connection = GetConnection();

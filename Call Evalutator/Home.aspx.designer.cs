@@ -276,22 +276,22 @@ namespace Call_Evalutator
         protected global::System.Web.UI.WebControls.ImageButton rdrBtn;
 
         /// <summary>
-        /// Controllo divGrv.
+        /// Controllo strenght.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGrv;
+        protected global::System.Web.UI.WebControls.TextBox strenght;
 
         /// <summary>
-        /// Controllo grvDati.
+        /// Controllo weakness.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvDati;
+        protected global::System.Web.UI.WebControls.TextBox weakness;
 
         /// <summary>
         /// Controllo cc_.
